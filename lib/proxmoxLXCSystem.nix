@@ -4,7 +4,7 @@
   mylib,
   myvars,
   # Per-host
-  sshPublicKeys,
+  sshLoginKey,
   nixos-modules,
   ...
 }:
@@ -17,11 +17,10 @@ in
 nixpkgs.lib.nixosSystem {
   inherit system specialArgs;
   modules = nixos-modules ++ [
-    ../modules/core
     ../modules/proxmox
     {
       services.openssh.enable = true;
-      users.users.root.openssh.authorizedKeys.keys = sshPublicKeys;
+      users.users.root.openssh.authorizedKeys.keys = [ sshLoginKey ];
     }
   ];
 }

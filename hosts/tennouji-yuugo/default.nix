@@ -43,9 +43,7 @@
 # Running hypervised on hashida-itaru
 {
   name = "tennouji-yuugo";
-  sshPublicKeys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKO1LXB1MfKrKNoM3WatxCsZLVQwZTl6r+QD4Yyl6S7"
-  ];
+  sshLoginKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKO1LXB1MfKrKNoM3WatxCsZLVQwZTl6r+QD4Yyl6S7";
 
   nixos-modules = [
     ./dns.nix

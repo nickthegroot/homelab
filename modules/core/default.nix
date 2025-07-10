@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, agenix, ... }:
 {
+  imports = [ agenix.nixosModules.default ];
+
   time.timeZone = "America/Los_Angeles";
 
   environment.systemPackages = with pkgs; [
