@@ -8,4 +8,5 @@ let
 in
 {
   "maybe-finance.age".publicKeys = tennouji-nae-keys;
+  "bar-assistant.age".publicKeys = tennouji-nae-keys;
 }

@@ -47,6 +47,7 @@
   sshSystemKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdBWScuyKx9YpbSjIE7CCkAOX4KiDd/y5l5aQ2d+JOr";
 
   nixos-modules = [
+    ./bar-assistant.nix
     ./maybe-finance.nix
     ./podman.nix
   ];
