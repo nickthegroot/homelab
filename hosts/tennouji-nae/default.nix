@@ -38,7 +38,7 @@
 #       :+#%%%*.    .+#%@@%*
 #       .::---:      .::::-:
 #
-# Secondary Home Server, responsible for a random assortment of services
+# Testing Server, responsible for running miscellaneous services.
 # Running hypervised on hashida-itaru
 
 {
@@ -48,7 +48,7 @@
 
   nixos-modules = [
     ./bar-assistant.nix
-    ./maybe-finance.nix
     ./podman.nix
+    ./reverse-proxy
   ];
 }

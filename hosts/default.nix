@@ -32,7 +32,7 @@ let
 
   proxmoxLXCHosts = {
     x86_64-linux = [
-      ./tennouji-yuugo
+      ./future-gadget-lab
       ./tennouji-nae
     ];
   };

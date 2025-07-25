@@ -1,0 +1,14 @@
+http://bar.worldline.local {
+  # API
+  handle_path /bar/* {
+    reverse_proxy 127.0.0.1:9000
+  }
+
+  # Search
+  handle_path /search/* {
+    reverse_proxy 127.0.0.1:9001
+  }
+
+  # Frontend (everything else)
+  reverse_proxy 127.0.0.1:9002
+}
