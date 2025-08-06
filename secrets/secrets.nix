@@ -15,4 +15,5 @@ in
   "caddy.age".publicKeys = future-gadget-lab-keys;
 
   "bar-assistant.age".publicKeys = tennouji-nae-keys;
+  "anki-sync-nickthegroot.age".publicKeys = tennouji-nae-keys;
 }

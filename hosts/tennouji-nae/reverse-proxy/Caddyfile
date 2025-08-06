@@ -12,3 +12,11 @@ http://bar.worldline.local {
   # Frontend (everything else)
   reverse_proxy 127.0.0.1:9002
 }
+
+http://anki-sync.worldline.local {
+  reverse_proxy 127.0.0.1:27701
+}
+
+http://ai.worldline.local {
+  reverse_proxy 127.0.0.1:11111
+}

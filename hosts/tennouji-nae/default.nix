@@ -47,6 +47,8 @@
   sshSystemKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdBWScuyKx9YpbSjIE7CCkAOX4KiDd/y5l5aQ2d+JOr";
 
   nixos-modules = [
+    ./ai-frontend.nix
+    ./anki-sync.nix
     ./bar-assistant.nix
     ./podman.nix
     ./reverse-proxy
