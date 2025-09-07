@@ -14,9 +14,5 @@ http://bar.worldline.local {
 }
 
 http://anki-sync.worldline.local {
-  reverse_proxy 127.0.0.1:27701
-}
-
-http://ai.worldline.local {
-  reverse_proxy 127.0.0.1:11111
+  reverse_proxy localhost:27701
 }
