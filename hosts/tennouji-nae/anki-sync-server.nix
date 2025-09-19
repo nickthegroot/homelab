@@ -10,7 +10,6 @@
 
   services.anki-sync-server-user = {
     enable = true;
-    baseDirectory = "/mnt/media/anki";
     port = 27701;
     users = [
       {
