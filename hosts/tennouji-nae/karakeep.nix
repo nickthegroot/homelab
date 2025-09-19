@@ -1,0 +1,5 @@
+{
+  services.karakeep = {
+    enable = true;
+  };
+}
