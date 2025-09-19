@@ -44,7 +44,7 @@
 {
   name = "tennouji-nae";
   sshLoginKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTWtzD9mAq8Oyj9YOaQLJMmHhzY0cmspmDI4DdCtFqZ";
-  sshSystemKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdBWScuyKx9YpbSjIE7CCkAOX4KiDd/y5l5aQ2d+JOr";
+  sshSystemKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChpFhqRc/sfCskrADKeaA/LL9vL7fFZj3CeSxlqYVtq";
 
   nixos-modules = [
     ./anki-sync-server.nix
