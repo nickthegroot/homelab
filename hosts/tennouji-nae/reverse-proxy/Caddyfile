@@ -16,3 +16,11 @@ http://bar.worldline.local {
 http://anki-sync.worldline.local {
   reverse_proxy localhost:27701
 }
+
+http://home.worldline.local {
+  reverse_proxy [::1]:8123
+}
+
+http://linkwarden.worldline.local {
+  reverse_proxy localhost:3640
+}
