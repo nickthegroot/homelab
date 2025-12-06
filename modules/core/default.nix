@@ -1,6 +1,9 @@
 { pkgs, agenix, ... }:
 {
-  imports = [ agenix.nixosModules.default ];
+  imports = [
+    agenix.nixosModules.default
+    ./auto-rebuild.nix
+  ];
 
   time.timeZone = "America/Los_Angeles";
 
