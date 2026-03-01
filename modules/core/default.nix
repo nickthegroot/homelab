@@ -1,8 +1,29 @@
-{ pkgs, agenix, ... }:
+{
+  pkgs,
+  mylib,
+  agenix,
+  ...
+}:
 {
   imports = [
     agenix.nixosModules.default
     ./auto-rebuild.nix
+    ../services/default.nix
+  ];
+
+  nixpkgs.overlays = [
+    (
+      final: prev:
+      let
+        newPackageFiles = mylib.scanPaths ../../packages;
+        newPackageNames = map (
+          path: prev.lib.strings.removeSuffix ".nix" (baseNameOf path)
+        ) newPackageFiles;
+      in
+      prev.lib.genAttrs newPackageNames (
+        name: prev.callPackage (../../packages + "/${name}/package.nix") { }
+      )
+    )
   ];
 
   time.timeZone = "America/Los_Angeles";

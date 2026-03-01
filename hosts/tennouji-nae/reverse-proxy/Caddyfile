@@ -20,3 +20,11 @@ http://anki-sync.worldline.local {
 http://linkwarden.worldline.local {
   reverse_proxy localhost:3640
 }
+
+http://mokuro.worldline.local {
+  reverse_proxy localhost:4821
+}
+
+http://mokuro-bunko.worldline.local {
+  reverse_proxy localhost:4822
+}
