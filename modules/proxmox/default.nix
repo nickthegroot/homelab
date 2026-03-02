@@ -15,4 +15,6 @@
     manageNetwork = false;
     privileged = false;
   };
+
+  boot.tmp.useTmpfs = true;
 }
