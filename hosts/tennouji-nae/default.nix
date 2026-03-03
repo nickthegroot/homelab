@@ -49,7 +49,6 @@
   nixos-modules = [
     ./anki-sync-server.nix
     ./bar-assistant.nix
-    ./linkwarden.nix
     ./mokuro.nix
     ./podman.nix
     ./reverse-proxy

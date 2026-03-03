@@ -16,5 +16,4 @@ in
 
   "bar-assistant.age".publicKeys = tennouji-nae-keys;
   "anki-sync-nickthegroot.age".publicKeys = tennouji-nae-keys;
-  "linkwarden.age".publicKeys = tennouji-nae-keys;
 }

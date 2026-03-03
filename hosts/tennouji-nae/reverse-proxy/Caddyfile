@@ -17,10 +17,6 @@ http://anki-sync.worldline.local {
   reverse_proxy localhost:27701
 }
 
-http://linkwarden.worldline.local {
-  reverse_proxy localhost:3640
-}
-
 http://mokuro.worldline.local {
   reverse_proxy localhost:4821
 }
