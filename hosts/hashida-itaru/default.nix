@@ -39,10 +39,13 @@
 #    ::........::--===+++++====-=---------=-----::...:-:
 #    +*++++=====---=--=--===--------------=-----==+**##-
 #
-# Actual host for many LXC services
-# Dell Optiplex 9020, running Proxmox VE
-# Not managed by Nix, but name-reserved for documentation
+# Dell XPS 13 9350
+
+{ mylib, ... }:
 {
   name = "hashida-itaru";
-  nixos-modules = [ ];
+  nixos-modules = mylib.scanPaths ./.;
+
+  sshLoginKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTWtzD9mAq8Oyj9YOaQLJMmHhzY0cmspmDI4DdCtFqZ";
+  sshSystemKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqSr/i8fkr0uQGHGZ7nyVEO6rbWMs4+5x0yblnvCCbC";
 }

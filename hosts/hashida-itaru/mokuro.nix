@@ -4,6 +4,7 @@
       enable = true;
       port = 4821;
     };
+    caddy.virtualHosts."http://mokuro.worldline.local".extraConfig = "reverse_proxy localhost:4821";
 
     mokuro-bunko = rec {
       enable = true;
@@ -17,5 +18,7 @@
         ];
       };
     };
+    caddy.virtualHosts."http://mokuro-bunko.worldline.local".extraConfig =
+      "reverse_proxy localhost:4822";
   };
 }

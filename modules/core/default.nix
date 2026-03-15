@@ -7,7 +7,6 @@
 {
   imports = [
     agenix.nixosModules.default
-    ./auto-rebuild.nix
     ../services/default.nix
   ];
 
@@ -27,6 +26,12 @@
   ];
 
   time.timeZone = "America/Los_Angeles";
+
+  nix.optimise.automatic = true;
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -50,6 +55,7 @@
     tree
     gnutar
     rsync
+    yazi
   ];
 
   nix.settings.experimental-features = [

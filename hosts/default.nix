@@ -2,12 +2,11 @@ inputs:
 let
   inherit (inputs.nixpkgs) lib;
   mylib = import ../lib { inherit lib; };
-  myvars = import ../vars;
 
   createSystem =
     wrapper: system: hostPath:
     let
-      systemConfig = import hostPath;
+      systemConfig = import hostPath { inherit mylib; };
     in
     {
       inherit (systemConfig) name;
@@ -18,7 +17,6 @@ let
             inputs
             system
             mylib
-            myvars
             ;
         }
       );
@@ -30,15 +28,12 @@ let
       lib.attrsets.mapAttrsToList (system: hostPaths: map (createSystem wrapper system) hostPaths) hosts
     );
 
-  proxmoxLXCHosts = {
-    x86_64-linux = [
-      ./future-gadget-lab
-      ./tennouji-nae
-    ];
+  nixosHosts = {
+    x86_64-linux = [ ./hashida-itaru ];
   };
 
-  proxmoxLXCSystems = createSystems mylib.proxmoxLXCSystem proxmoxLXCHosts;
+  nixosSystems = createSystems mylib.nixosSystem nixosHosts;
 in
 {
-  nixosConfigurations = builtins.listToAttrs proxmoxLXCSystems;
+  nixosConfigurations = builtins.listToAttrs nixosSystems;
 }

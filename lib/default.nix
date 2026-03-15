@@ -1,12 +1,12 @@
 { lib, ... }:
 {
-  proxmoxLXCSystem = import ./proxmoxLXCSystem.nix;
+  nixosSystem = import ./nixosSystem.nix;
 
   # use path relative to the root of the project
   relativeToRoot = lib.path.append ../.;
   scanPaths =
     path:
-    builtins.map (f: (path + "/${f}")) (
+    map (f: (path + "/${f}")) (
       builtins.attrNames (
         lib.attrsets.filterAttrs (
           path: _type:
