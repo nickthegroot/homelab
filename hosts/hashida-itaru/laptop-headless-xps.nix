@@ -4,10 +4,11 @@
     nixos-hardware.nixosModules.dell-xps-13-9350
   ];
 
-  # Disable screen after 5m
-  boot.kernelParams = [ "consoleblank=300" ];
+  boot.kernelParams = [
+    "consoleblank=300"
+    "nomodeset"
+  ];
 
-  # Ignore lid & sleep
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
     HandleLidSwitchDocked = "ignore";
