@@ -6,7 +6,7 @@
 
   boot.kernelParams = [
     "consoleblank=300"
-    "nomodeset"
+    "pcie_aspm=off"
   ];
 
   services.logind.settings.Login = {
