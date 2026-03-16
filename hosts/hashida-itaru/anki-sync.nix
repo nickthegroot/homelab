@@ -1,13 +1,12 @@
 { config, ... }:
 {
-  # == Secrets
   age.secrets.anki-sync-nickthegroot.file = ../../secrets/anki-sync-nickthegroot.age;
 
-  services = {
-    anki-sync-server = {
-      # Awaiting final setup of NAS - will place/backup files on there
-      enable = false;
+  services = rec {
+    anki-sync-user = {
+      enable = true;
       port = 27701;
+
       users = [
         {
           username = "nickthegroot";
@@ -16,6 +15,9 @@
       ];
     };
 
-    caddy.virtualHosts."http://anki-sync.worldline.local".extraConfig = "reverse_proxy localhost:4821";
+    caddy.virtualHosts."http://anki-sync.worldline.local".extraConfig =
+      "reverse_proxy localhost:${toString anki-sync-user.port}";
   };
+
+  users.users.anki-sync.extraGroups = [ "nas-users" ];
 }

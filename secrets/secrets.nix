@@ -10,4 +10,5 @@ let
 in
 {
   "anki-sync-nickthegroot.age".publicKeys = hashida-itaru-keys;
+  "hashida-itaru-nas-account.age".publicKeys = hashida-itaru-keys;
 }
