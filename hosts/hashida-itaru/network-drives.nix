@@ -1,16 +1,14 @@
-{ config, ... }:
 {
-  age.secrets.hashida-itaru-nas-account.file = ../../secrets/hashida-itaru-nas-account.age;
+  services = {
+    nfs-mount = {
+      enable = true;
+      host = "192.168.1.10";
 
-  services.nas-mount = {
-    enable = true;
-    host = "192.168.1.10";
-    secretsFile = config.age.secrets.hashida-itaru-nas-account.path;
-
-    shares = {
-      "/mnt/media" = "media";
-      "/mnt/media-sensitive" = "media-sensitive";
-      "/mnt/hosting" = "hosting";
+      shares = {
+        "/mnt/media" = "/mnt/user/media";
+        "/mnt/media-sensitive" = "/mnt/user/media-sensitive";
+        "/mnt/hosting" = "/mnt/user/hosting";
+      };
     };
   };
 }

@@ -8,17 +8,17 @@
 with lib;
 
 let
-  cfg = config.services.nas-mount;
+  cfg = config.services.smb-mount;
 
   automountOpts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 in
 {
-  options.services.nas-mount = {
-    enable = mkEnableOption "Mount NAS shares";
+  options.services.smb-mount = {
+    enable = mkEnableOption "Mount SMB/CIFS shares";
 
     host = mkOption {
       type = types.str;
-      description = "Hostname or IP address of the NAS.";
+      description = "Hostname or IP address of the SMB server.";
       example = "nas.local";
     };
 
@@ -31,16 +31,16 @@ in
           username=...
           password=...
       '';
-      example = "/run/secrets/nas-credentials";
+      example = "/run/secrets/smb-credentials";
     };
 
     shares = mkOption {
       type = types.attrsOf types.str;
       default = { };
       description = ''
-        Attribute set mapping local mount points to NAS share names.
+        Attribute set mapping local mount points to SMB share names.
         Each key is the absolute path where the share will be mounted;
-        each value is the name of the share on the NAS.
+        each value is the name of the share on the server.
       '';
       example = literalExpression ''
         {

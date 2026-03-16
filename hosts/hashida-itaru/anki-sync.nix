@@ -6,6 +6,7 @@
     anki-sync-user = {
       enable = true;
       port = 27701;
+      baseDirectory = "/mnt/hosting/anki-sync";
 
       users = [
         {
