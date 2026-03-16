@@ -14,5 +14,13 @@
     };
     caddy.virtualHosts."http://komga.worldline.local".extraConfig =
       "reverse_proxy localhost:${toString komga.settings.server.port}";
+
+    immich = {
+      enable = true;
+      port = 2283;
+      mediaLocation = "/mnt/media-sensitive/photos";
+    };
+    caddy.virtualHosts."http://photos.worldline.local".extraConfig =
+      "reverse_proxy localhost:${toString immich.port}";
   };
 }
