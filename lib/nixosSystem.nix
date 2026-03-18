@@ -21,8 +21,25 @@ nixpkgs.lib.nixosSystem {
   modules = nixos-modules ++ [
     ../modules/core
     {
-      services.openssh.enable = true;
-      users.users.root.openssh.authorizedKeys.keys = [ sshLoginKey ];
+      services.openssh = {
+        enable = true;
+        settings = {
+          KbdInteractiveAuthentication = false;
+          PermitRootLogin = "no";
+        };
+      };
+
+      users.users.nickthegroot = {
+        isNormalUser = true;
+        openssh.authorizedKeys.keys = [ sshLoginKey ];
+        extraGroups = [
+          "nickthegroot"
+          "users"
+          "networkmanager"
+          "wheel"
+        ];
+      };
+      users.groups.nickthegroot = { };
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
