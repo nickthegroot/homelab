@@ -10,6 +10,8 @@
     mokuro-bunko = rec {
       enable = true;
       group = "media";
+      data_path = "/mnt/hosting/mokuro-library";
+
       settings = {
         server.port = 4822;
         catalog.reader_url = "http://mokuro.worldline.local";

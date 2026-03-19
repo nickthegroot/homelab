@@ -10,6 +10,7 @@ with lib;
 let
   cfg = config.services.mokuro-bunko;
   yamlFormat = pkgs.formats.yaml { };
+  basePath = cfg.settings.storage.base_path;
 in
 {
   options.services.mokuro-bunko = {
@@ -31,6 +32,18 @@ in
       type = types.str;
       default = "mokuro-bunko";
       description = "Group to run the mokuro-bunko service as.";
+    };
+
+    data_path = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = ''
+        Optional path to the library data directory. When set, a symlink is
+        created at <literal>''${storage.base_path}/library</literal> pointing to
+        this path, and the service is granted read/write access to it regardless
+        of where it lives on the filesystem.
+      '';
+      example = "/mnt/nas/manga";
     };
 
     settings = mkOption {
@@ -99,6 +112,15 @@ in
       # };
     };
 
+    # Ensure the base directory exists with correct ownership before the service starts.
+    systemd.tmpfiles.rules = [
+      "d ${basePath} 0750 ${cfg.user} ${cfg.group} -"
+    ]
+    ++ optionals (cfg.data_path != null) [
+      # Symlink <basePath>/library → data_path
+      "L+ ${basePath}/library - - - - ${cfg.data_path}"
+    ];
+
     systemd.services.mokuro-bunko = {
       description = "Mokuro Bunko Server";
       after = [ "network.target" ];
@@ -112,22 +134,25 @@ in
         Restart = "always";
         User = cfg.user;
         Group = cfg.group;
-        StateDirectory = "mokuro-bunko";
-        WorkingDirectory = "/var/lib/mokuro-bunko";
+        WorkingDirectory = basePath;
         CapabilityBoundingSet = "";
         NoNewPrivileges = true;
         PrivateTmp = true;
         ProtectHome = true;
         ProtectSystem = "strict";
         ReadOnlyPaths = [ "/" ];
-        ReadWritePaths = [ "/var/lib/mokuro-bunko" ];
+        ReadWritePaths = [ basePath ] ++ optionals (cfg.data_path != null) [ cfg.data_path ];
+      }
+      // optionalAttrs (cfg.data_path != null) {
+        # Make the external data_path visible inside the service's filesystem view.
+        BindPaths = [ cfg.data_path ];
       };
     };
 
     users.users.${cfg.user} = {
       isSystemUser = true;
       group = cfg.group;
-      home = "/var/lib/mokuro-bunko";
+      home = basePath;
     };
 
     users.groups.${cfg.group} = { };
