@@ -21,6 +21,18 @@ in
       description = "The mokuro-bunko package to use.";
     };
 
+    user = mkOption {
+      type = types.str;
+      default = "mokuro-bunko";
+      description = "User to run the mokuro-bunko service as.";
+    };
+
+    group = mkOption {
+      type = types.str;
+      default = "mokuro-bunko";
+      description = "Group to run the mokuro-bunko service as.";
+    };
+
     settings = mkOption {
       inherit (yamlFormat) type;
       default = { };
@@ -98,8 +110,8 @@ in
         #   Relevant: https://github.com/Gnathonic/mokuro-bunko/blob/693b9cc52abaeeb6bab6833399d8bd44b2fa705b/src/mokuro_bunko/ocr/installer.py#L318-L320
         ExecStart = "${cfg.package}/bin/mokuro-bunko --config ${yamlFormat.generate "mokuro-bunko-config.yaml" cfg.settings} serve --ocr skip";
         Restart = "always";
-        User = "mokuro-bunko";
-        Group = "mokuro-bunko";
+        User = cfg.user;
+        Group = cfg.group;
         StateDirectory = "mokuro-bunko";
         WorkingDirectory = "/var/lib/mokuro-bunko";
         CapabilityBoundingSet = "";
@@ -112,12 +124,12 @@ in
       };
     };
 
-    users.users.mokuro-bunko = {
+    users.users.${cfg.user} = {
       isSystemUser = true;
-      group = "mokuro-bunko";
+      group = cfg.group;
       home = "/var/lib/mokuro-bunko";
     };
 
-    users.groups.mokuro-bunko = { };
+    users.groups.${cfg.group} = { };
   };
 }

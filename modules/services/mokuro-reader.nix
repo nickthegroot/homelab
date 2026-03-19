@@ -31,6 +31,18 @@ in
       default = "0.0.0.0";
       description = "The host the server will listen on.";
     };
+
+    user = mkOption {
+      type = types.str;
+      default = "mokuro-reader";
+      description = "User to run the mokuro-reader service as.";
+    };
+
+    group = mkOption {
+      type = types.str;
+      default = "mokuro-reader";
+      description = "Group to run the mokuro-reader service as.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -47,8 +59,8 @@ in
       serviceConfig = {
         ExecStart = "${cfg.package}/bin/mokuro-reader";
         Restart = "always";
-        User = "mokuro-reader";
-        Group = "mokuro-reader";
+        User = cfg.user;
+        Group = cfg.group;
         StateDirectory = "mokuro-reader";
         WorkingDirectory = "/var/lib/mokuro-reader";
         CapabilityBoundingSet = "";
@@ -61,12 +73,12 @@ in
       };
     };
 
-    users.users.mokuro-reader = {
+    users.users.${cfg.user} = {
       isSystemUser = true;
-      group = "mokuro-reader";
+      group = cfg.group;
       home = "/var/lib/mokuro-reader";
     };
 
-    users.groups.mokuro-reader = { };
+    users.groups.${cfg.group} = { };
   };
 }

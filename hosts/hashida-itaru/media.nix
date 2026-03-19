@@ -3,6 +3,7 @@
     jellyfin = {
       enable = true;
       openFirewall = true;
+      group = "media";
       # port = 8096 is the default, and can't be easily set in nix
     };
     caddy.virtualHosts."http://jellyfin.worldline.local".extraConfig = "reverse_proxy localhost:8096";
@@ -11,6 +12,7 @@
       enable = true;
       settings.server.port = 8097;
       openFirewall = true;
+      group = "media";
     };
     caddy.virtualHosts."http://komga.worldline.local".extraConfig =
       "reverse_proxy localhost:${toString komga.settings.server.port}";
@@ -19,6 +21,7 @@
       enable = true;
       port = 2283;
       mediaLocation = "/mnt/media-sensitive/photos";
+      group = "media";
     };
     caddy.virtualHosts."http://photos.worldline.local".extraConfig =
       "reverse_proxy localhost:${toString immich.port}";
