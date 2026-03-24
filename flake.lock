@@ -71,11 +71,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773998143,
-        "narHash": "sha256-r9t0wxfpqP35kZ1Rp8VPcTBZiMa8MgYkOtzgwtpBXus=",
+        "lastModified": 1774338634,
+        "narHash": "sha256-9yeQbe0Xn6RPPygM3UlwvXYNZTP0btX7ChdoXuij3js=",
         "owner": "nickthegroot",
         "repo": "glance-anki",
-        "rev": "973515ef93c85609227550473776f960e046c57c",
+        "rev": "89006f0f54de01ff3b609470764901f19ddc76d5",
         "type": "github"
       },
       "original": {

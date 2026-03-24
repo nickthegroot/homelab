@@ -31,7 +31,6 @@ in
       group = "anki-sync";
 
       collectionPath = "${config.services.anki-sync-user.baseDirectory}/nickthegroot/collection.anki2";
-      defaultDays = 30;
       port = 8239;
     };
   };

@@ -35,15 +35,9 @@
           type = "extension";
           url = "http://localhost:${toString config.services.glance-anki.port}/graph";
           allow-potentially-dangerous-html = true;
+          cache = "5m";
           parameters = {
-            days = 30;
-            background-color = "#1d2025";
-            primary-color = "#f3afaf";
-            svg-height = 150;
-            show-months = true;
-            show-weekdays = true;
-            font-size = 9;
-            transition-hue = false;
+            days = 90;
           };
         }
 
