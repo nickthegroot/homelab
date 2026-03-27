@@ -18,6 +18,10 @@
               label = "East Coast";
             }
             {
+              timezone = "Europe/London";
+              label = "London";
+            }
+            {
               timezone = "Asia/Tokyo";
               label = "Tokyo";
             }
@@ -91,49 +95,15 @@
         }
 
         {
-          title = "Blogs";
+          title = "Favorites";
           type = "rss";
           limit = 10;
           collapse-after = 5;
-          cache = "12h";
           style = "detailed-list";
           feeds = [
             {
-              url = "http://rss.worldline.local/api/query.php?user=admin&t=2LA323ZEBvxSPLUYNu84Yh&f=rss";
-              title = "FreshRSS Blogs Feed";
-            }
-          ];
-        }
-
-        {
-          type = "group";
-          widgets = [
-            {
-              title = "Releases";
-              type = "rss";
-              limit = 5;
-              collapse-after = 3;
-              cache = "12h";
-              feeds = [
-                {
-                  url = "http://rss.worldline.local/api/query.php?user=admin&t=2vX7H8ve0bfXgbgzufX2OZ&f=rss";
-                  title = "FreshRSS Releases Feed";
-                }
-              ];
-            }
-
-            {
-              title = "Papers";
-              type = "rss";
-              limit = 20;
-              collapse-after = 8;
-              cache = "24h";
-              feeds = [
-                {
-                  url = "http://rss.worldline.local/api/query.php?user=admin&t=61qH2IpFsjMDQrF9jL83IF&f=rss";
-                  title = "FreshRSS Papers Feed";
-                }
-              ];
+              url = "http://rss.worldline.local/api/query.php?user=admin&t=7hp4NHm5HNAmQjGPgq3m07&f=rss";
+              title = "Favorites";
             }
           ];
         }
