@@ -40,6 +40,7 @@ nixpkgs.lib.nixosSystem {
         ];
       };
       users.groups.nickthegroot = { };
+      nix.settings.trusted-users = [ "nickthegroot" ];
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
