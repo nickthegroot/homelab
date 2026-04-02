@@ -82,6 +82,12 @@
       size = "full";
       widgets = [
         {
+          type = "search";
+          search-engine = "duckduckgo";
+          autofocus = true;
+        }
+
+        {
           title = "xkcd";
           type = "rss";
           cache = "6h";
