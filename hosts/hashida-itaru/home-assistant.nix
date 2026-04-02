@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   catppuccinTheme = pkgs.fetchurl {
     url = "https://github.com/catppuccin/home-assistant/releases/download/v2.1.2/catppuccin.yaml";
@@ -11,7 +11,7 @@ let
   '';
 in
 {
-  services = rec {
+  services = {
     # https://wiki.nixos.org/wiki/Home_Assistant
     home-assistant = {
       enable = true;
@@ -42,6 +42,12 @@ in
         frontend = {
           themes = "!include_dir_merge_named ${themesDir}";
         };
+
+        # https://nixos.wiki/wiki/Home_Assistant#Combine_declarative_and_UI_defined_automations
+        automation = "!include automations.yaml";
+
+        # https://nixos.wiki/wiki/Home_Assistant#Combine_declarative_and_UI_defined_scenes
+        scenes = "!include scenes.yaml";
       };
     };
 
@@ -63,6 +69,11 @@ in
     };
 
     caddy.virtualHosts."http://home.worldline.local".extraConfig =
-      "reverse_proxy localhost:${toString home-assistant.config.http.server_port}";
+      "reverse_proxy localhost:${toString config.services.home-assistant.config.http.server_port}";
   };
+
+  systemd.tmpfiles.rules = [
+    "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
+    "f ${config.services.home-assistant.configDir}/scenes.yaml 0755 hass hass"
+  ];
 }
