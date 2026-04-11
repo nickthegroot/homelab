@@ -1,0 +1,17 @@
+name: Test
+
+on:
+  pull_request:
+
+jobs:
+  nix-flake-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Pull nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Check flake
+        run: nix flake check
