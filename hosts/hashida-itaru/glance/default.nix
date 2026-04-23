@@ -1,13 +1,12 @@
-{ glance-anki, config, ... }@inputs:
+inputs:
 let
   port = 5678;
 in
 {
-  imports = [ glance-anki.nixosModules.default ];
-
   services = {
     glance = {
       enable = true;
+      environmentFile = "/var/lib/secrets/glance-env";
       settings = {
         server.port = port;
 
@@ -24,14 +23,6 @@ in
           (import ./pages/home.nix inputs)
         ];
       };
-    };
-
-    glance-anki = {
-      enable = true;
-      group = "anki-sync";
-
-      collectionPath = "${config.services.anki-sync-user.baseDirectory}/nickthegroot/collection.anki2";
-      port = 8239;
     };
   };
 

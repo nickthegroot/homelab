@@ -35,17 +35,6 @@
         }
 
         {
-          title = "Anki";
-          type = "extension";
-          url = "http://localhost:${toString config.services.glance-anki.port}/graph";
-          allow-potentially-dangerous-html = true;
-          cache = "5m";
-          parameters = {
-            days = 90;
-          };
-        }
-
-        {
           type = "bookmarks";
           groups = [
             {
@@ -82,12 +71,6 @@
       size = "full";
       widgets = [
         {
-          type = "search";
-          search-engine = "duckduckgo";
-          autofocus = true;
-        }
-
-        {
           title = "xkcd";
           type = "rss";
           cache = "6h";
@@ -115,11 +98,7 @@
         }
 
         {
-          type = "group";
-          widgets = [
-            { type = "hacker-news"; }
-            { type = "lobsters"; }
-          ];
+          type = "hacker-news";
         }
       ];
     }
@@ -150,6 +129,30 @@
           url = "http://dns.worldline.local";
           token._secret = "/var/lib/secrets/technitium-api-token";
         }
+
+        {
+          type = "markets";
+          markets = [
+            {
+              symbol = "VT";
+              name = "Vanguard Total World";
+            }
+            {
+              symbol = "VTI";
+              name = "Vanguard Total US";
+            }
+          ];
+        }
+
+        (import ../plugins/mortgage.nix {
+          title = "15-Year Fixed Rate Mortgage Avg";
+          seriesId = "MORTGAGE15US";
+        })
+
+        (import ../plugins/mortgage.nix {
+          title = "30-Year Fixed Rate Mortgage Avg";
+          seriesId = "MORTGAGE30US";
+        })
       ];
     }
   ];
