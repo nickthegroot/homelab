@@ -230,7 +230,6 @@ in
       default = { };
       example = literalExpression ''
         {
-          APP_URL = "salt-rim.example.com";
           MAIL_MAILER = "smtp";
           MAIL_HOST = "smtp.example.com";
           MAIL_PORT = 587;
