@@ -10,7 +10,10 @@ with lib;
 let
   cfg = config.services.bar-assistant;
 
-  bar-assistant = cfg.package.override { dataDir = cfg.dataDir; };
+  bar-assistant = cfg.package.override {
+    dataDir = cfg.dataDir;
+    includeDefaultData = cfg.includeDefaultData;
+  };
 
   inherit (bar-assistant.passthru) phpPackage;
 
@@ -203,6 +206,15 @@ in
       };
     };
 
+    includeDefaultData = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Fetch the bar-assistant/data repository and expose it at
+        `''${dataDir}/resources/data` as a read-only symlink into the Nix store.
+      '';
+    };
+
     config = mkOption {
       type =
         with types;
@@ -288,7 +300,8 @@ in
         "listen.mode" = "0660";
         "listen.owner" = cfg.user;
         "listen.group" = config.services.caddy.group;
-      } // cfg.poolConfig;
+      }
+      // cfg.poolConfig;
     };
 
     services.caddy = {

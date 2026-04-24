@@ -1,6 +1,7 @@
 {
   lib,
   dataDir ? "/var/lib/bar-assistant",
+  includeDefaultData ? true,
   fetchFromGitHub,
   php84,
   vips,
@@ -15,6 +16,13 @@ let
       all.redis
     ]
   );
+
+  defaultData = fetchFromGitHub {
+    owner = "bar-assistant";
+    repo = "data";
+    rev = "0d71544764b78e6c25adad197ed02eeb1d1ec7ee";
+    hash = "sha256-0HCkNJpc1Qnif+xB5yDyiEoSJHHeRvxwOsNA/hrgDe0=";
+  };
 in
 php.buildComposerProject2 (finalAttrs: rec {
   pname = "bar-assistant";
@@ -49,6 +57,9 @@ php.buildComposerProject2 (finalAttrs: rec {
     ln -s ${dataDir}/storage/bar-assistant/uploads $bar_out/public/uploads
 
     chmod +x $bar_out/artisan
+  ''
+  + lib.optionalString includeDefaultData ''
+    ln -s ${defaultData} $bar_out/resources/data
   '';
 
   passthru.phpPackage = php;
