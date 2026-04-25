@@ -8,8 +8,6 @@ with lib;
 
 let
   cfg = config.services.nfs-mount;
-
-  automountOpts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 in
 {
   options.services.nfs-mount = {
@@ -44,7 +42,6 @@ in
     fileSystems = mapAttrs (mountPoint: exportPath: {
       device = "${cfg.host}:${exportPath}";
       fsType = "nfs";
-      options = [ automountOpts ];
     }) cfg.shares;
   };
 }
