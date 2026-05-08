@@ -10,10 +10,11 @@ in
       masterKeyFile = "/var/lib/secrets/meilisearch-key";
     };
 
-    bar-assistant = {
+    bar-assistant = rec {
       enable = true;
       appKeyFile = "/var/lib/secrets/bar-assistant-key";
       hostName = "http://bar-api.worldline.local";
+      appURL = hostName;
 
       redis.enable = true;
       meilisearch = {
