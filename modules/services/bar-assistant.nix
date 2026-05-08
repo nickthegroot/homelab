@@ -300,8 +300,10 @@ in
         "listen.mode" = "0660";
         "listen.owner" = cfg.user;
         "listen.group" = config.services.caddy.group;
+        "php_admin_value[ffi.enable]" = true;
       }
       // cfg.poolConfig;
+      phpEnv.LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.vips ];
     };
 
     services.caddy = {
@@ -398,13 +400,13 @@ in
       "d ${cfg.dataDir}                                    0750 ${cfg.user} ${cfg.group} - -"
       "d ${cfg.dataDir}/bootstrap                          0750 ${cfg.user} ${cfg.group} - -"
       "d ${cfg.dataDir}/cache                              0750 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage                            0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/app                        0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/app/public                 0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/bar-assistant              0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/bar-assistant/uploads      0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/bar-assistant/exports      0700 ${cfg.user} ${cfg.group} - -"
-      "d ${cfg.dataDir}/storage/bar-assistant/temp         0700 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage                            0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/app                        0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/app/public                 0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/bar-assistant              0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/bar-assistant/uploads      0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/bar-assistant/exports      0750 ${cfg.user} ${cfg.group} - -"
+      "d ${cfg.dataDir}/storage/bar-assistant/temp         0750 ${cfg.user} ${cfg.group} - -"
       "d ${cfg.dataDir}/storage/framework                  0700 ${cfg.user} ${cfg.group} - -"
       "d ${cfg.dataDir}/storage/framework/cache            0700 ${cfg.user} ${cfg.group} - -"
       "d ${cfg.dataDir}/storage/framework/sessions         0700 ${cfg.user} ${cfg.group} - -"
