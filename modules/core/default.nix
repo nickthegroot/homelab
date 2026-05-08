@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   mylib,
   agenix,
   ...
@@ -58,6 +59,7 @@
     yazi
   ];
 
+  nixpkgs.config.allowUnfree = lib.mkForce true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
