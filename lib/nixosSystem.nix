@@ -34,6 +34,7 @@ nixpkgs.lib.nixosSystem {
         openssh.authorizedKeys.keys = [ sshLoginKey ];
         extraGroups = [
           "nickthegroot"
+          "media"
           "users"
           "networkmanager"
           "wheel"
