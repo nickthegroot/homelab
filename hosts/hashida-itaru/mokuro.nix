@@ -10,7 +10,7 @@
     mokuro-bunko = rec {
       enable = true;
       group = "media";
-      data_path = "/mnt/hosting/mokuro-library";
+      data_path = "/mnt/media/books/manga";
 
       settings = {
         server.port = 4822;
