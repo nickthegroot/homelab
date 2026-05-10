@@ -114,7 +114,7 @@ in
 
     # Ensure the base directory exists with correct ownership before the service starts.
     systemd.tmpfiles.rules = [
-      "d ${basePath} 0750 ${cfg.user} ${cfg.group} -"
+      "d ${basePath} 0770 ${cfg.user} ${cfg.group} -"
     ]
     ++ optionals (cfg.data_path != null) [
       # Symlink <basePath>/library → data_path

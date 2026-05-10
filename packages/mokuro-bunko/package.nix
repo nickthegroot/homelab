@@ -12,8 +12,8 @@ python3Packages.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "Gnathonic";
     repo = "mokuro-bunko";
-    tag = "v${version}";
-    hash = "sha256-NG6NRM7DeuQOdqWP/9rENjqWLCooek2hK4XxiK0loIA=";
+    rev = "4c5f33f3fd10157802a21ff5d0fac9537c05714c";
+    hash = "sha256-pKvZuP7a+Hp0AC/sXMxxLDuGu6oH+q+aMmeIZ84DZjU=";
   };
 
   build-system = with python3Packages; [ hatchling ];
