@@ -3,6 +3,7 @@
   dataDir ? "/var/lib/bar-assistant",
   includeDefaultData ? true,
   fetchFromGitHub,
+  pkg-config,
   php84,
   vips,
 }:
@@ -38,6 +39,8 @@ php.buildComposerProject2 (finalAttrs: rec {
   vendorHash = "sha256-NgOoXjrpkS/cVVLzWW2ccCgiLkOJtrZxmoKgVB9Vi1Y=";
 
   buildInputs = [ vips ];
+
+  nativeBuildInputs = [ pkg-config ];
 
   composerStrictValidation = false;
 
