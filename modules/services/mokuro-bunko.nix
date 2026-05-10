@@ -106,10 +106,10 @@ in
         show_in_nav = false;
         public_access = true;
       };
-      # ocr = mkDefault {
-      #   backend = "auto";
-      #   poll_interval = 30;
-      # };
+      ocr = mkDefault {
+        backend = "auto";
+        poll_interval = 30;
+      };
     };
 
     # Ensure the base directory exists with correct ownership before the service starts.
@@ -127,10 +127,7 @@ in
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        # TODO: add ocr support
-        # Will need to figure out how to handle the custom venv it tries to create
-        #   Relevant: https://github.com/Gnathonic/mokuro-bunko/blob/693b9cc52abaeeb6bab6833399d8bd44b2fa705b/src/mokuro_bunko/ocr/installer.py#L318-L320
-        ExecStart = "${cfg.package}/bin/mokuro-bunko --config ${yamlFormat.generate "mokuro-bunko-config.yaml" cfg.settings} serve --ocr skip";
+        ExecStart = "${cfg.package}/bin/mokuro-bunko --config ${yamlFormat.generate "mokuro-bunko-config.yaml" cfg.settings} serve";
         Restart = "always";
         User = cfg.user;
         Group = cfg.group;
@@ -142,6 +139,17 @@ in
         ProtectSystem = "strict";
         ReadOnlyPaths = [ "/" ];
         ReadWritePaths = [ basePath ] ++ optionals (cfg.data_path != null) [ cfg.data_path ];
+        Environment = [
+          "MOKURO_BUNKO_OCR_ENV=${
+            pkgs.python3.withPackages (
+              python-pkgs: with python-pkgs; [
+                torch
+                torchvision
+                (toPythonModule pkgs.mokuro)
+              ]
+            )
+          }"
+        ];
       }
       // optionalAttrs (cfg.data_path != null) {
         # Make the external data_path visible inside the service's filesystem view.
