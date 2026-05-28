@@ -18,6 +18,9 @@
           enabled = true;
           reader_url = "http://mokuro.worldline.local";
         };
+
+        ocr.backend = "skip";
+
         cors.allowed_origins = [
           settings.catalog.reader_url
           "https://reader.mokuro.app"

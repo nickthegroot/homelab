@@ -2,8 +2,8 @@
   description = "Homelab configurations for various systems";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     mokuro-bunko = {
       url = "github:nickthegroot/mokuro-bunko";
