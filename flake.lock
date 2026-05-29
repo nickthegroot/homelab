@@ -92,11 +92,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779959486,
-        "narHash": "sha256-s+XeRPIbMvx6AIZQoUgcBx1vFLLoe32NwcQ2/Ebh00g=",
+        "lastModified": 1780036202,
+        "narHash": "sha256-Db4cBMrX2vi8LdINWvPzaRpX3UNNdLSrXyc+A/zyACA=",
         "owner": "nickthegroot",
         "repo": "mokuro-bunko",
-        "rev": "837bb79e7a24132b24d324bf4f6eecbc5822a102",
+        "rev": "82c1513c5ee4f09d45ad8a5ebdeba13735d87ebe",
         "type": "github"
       },
       "original": {
