@@ -30,6 +30,9 @@ in
         homeassistant = {
           name = "DeGroot Home";
           unit_system = "metric";
+          media_dirs = {
+            recordings = "/mnt/media-sensitive/recordings";
+          };
         };
 
         http = {
