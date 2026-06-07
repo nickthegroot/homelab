@@ -9,14 +9,12 @@
 }:
 
 let
-  php = php84.withExtensions (
-    { all, enabled }:
-    enabled
-    ++ [
-      all.ffi
-      all.redis
-    ]
-  );
+  php = php84.buildEnv {
+    extensions = { all, enabled }: enabled ++ [ all.ffi all.redis ];
+    extraConfig = ''
+      ffi.enable = true
+    '';
+  };
 
   defaultData = fetchFromGitHub {
     owner = "bar-assistant";
