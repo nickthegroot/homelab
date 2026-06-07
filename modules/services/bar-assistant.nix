@@ -304,6 +304,12 @@ in
       // cfg.poolConfig;
     };
 
+    # php-vips FFI loads libvips.so.42 via dlopen() which reads the OS process
+    # environment, not the PHP-FPM pool env[...] config. phpEnv only sets the
+    # latter, so we must set LD_LIBRARY_PATH on the systemd service itself.
+    systemd.services.phpfpm-bar-assistant.environment.LD_LIBRARY_PATH =
+      "${lib.getLib pkgs.vips}/lib";
+
     services.caddy = {
       enable = mkDefault true;
       virtualHosts."${cfg.hostName}".extraConfig = ''
@@ -320,6 +326,7 @@ in
       before = [ "phpfpm-bar-assistant.service" ];
       after = [ "network.target" ] ++ optional cfg.redis.enable "redis-bar-assistant.service";
       wantedBy = [ "multi-user.target" ];
+      environment.LD_LIBRARY_PATH = "${lib.getLib pkgs.vips}/lib";
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
@@ -357,6 +364,7 @@ in
       ]
       ++ optional cfg.redis.enable "redis-bar-assistant.service";
       wantedBy = [ "multi-user.target" ];
+      environment.LD_LIBRARY_PATH = "${lib.getLib pkgs.vips}/lib";
       serviceConfig = {
         ExecStart = "${phpPackage}/bin/php ${appDir}/artisan horizon";
         Restart = "always";
@@ -377,6 +385,7 @@ in
     systemd.services.bar-assistant-scheduler = {
       description = "Bar Assistant Laravel scheduler";
       after = [ "bar-assistant-setup.service" ];
+      environment.LD_LIBRARY_PATH = "${lib.getLib pkgs.vips}/lib";
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
