@@ -33,6 +33,7 @@ in
           media_dirs = {
             recordings = "/mnt/media-sensitive/recordings";
           };
+          allowlist_external_dirs = [ "/mnt/media-sensitive/recordings" ];
         };
 
         http = {
