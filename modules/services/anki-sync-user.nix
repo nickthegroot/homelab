@@ -138,6 +138,7 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       path = [ cfg.package ];
+      unitConfig.RequiresMountsFor = mkIf (hasPrefix "/" cfg.baseDirectory) cfg.baseDirectory;
       environment = {
         SYNC_BASE = cfg.baseDirectory;
         SYNC_HOST = specEscape cfg.address;
