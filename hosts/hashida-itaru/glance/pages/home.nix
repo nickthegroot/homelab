@@ -126,7 +126,7 @@
         {
           type = "dns-stats";
           service = "technitium";
-          url = "http://dns.worldline.local";
+          url = "http://192.168.1.10:5380/";
           token._secret = "/var/lib/secrets/technitium-api-token";
         }
 
