@@ -26,6 +26,6 @@ in
     };
   };
 
-  services.caddy.virtualHosts."http://dash.worldline.local".extraConfig =
+  services.caddy.virtualHosts."dash.home.nickthegroot.com".extraConfig =
     "reverse_proxy localhost:${toString port}";
 }

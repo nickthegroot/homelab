@@ -5,7 +5,7 @@
       port = 2000;
     };
 
-    caddy.virtualHosts."http://ai.worldline.local".extraConfig =
+    caddy.virtualHosts."ai.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:${toString open-webui.port}";
   };
 }

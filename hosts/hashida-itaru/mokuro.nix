@@ -5,7 +5,7 @@
       port = 4821;
       group = "media";
     };
-    caddy.virtualHosts."http://mokuro.worldline.local".extraConfig = "reverse_proxy localhost:4821";
+    caddy.virtualHosts."mokuro.home.nickthegroot.com".extraConfig = "reverse_proxy localhost:4821";
 
     mokuro-bunko = rec {
       enable = true;
@@ -16,7 +16,7 @@
         server.port = 4822;
         catalog = {
           enabled = true;
-          reader_url = "http://mokuro.worldline.local";
+          reader_url = "https://mokuro.home.nickthegroot.com";
         };
 
         ocr.backend = "skip";
@@ -28,7 +28,7 @@
         ];
       };
     };
-    caddy.virtualHosts."http://mokuro-bunko.worldline.local".extraConfig =
+    caddy.virtualHosts."mokuro-bunko.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:4822";
   };
 }

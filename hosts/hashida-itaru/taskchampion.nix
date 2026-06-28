@@ -5,7 +5,7 @@
       port = 10222;
     };
 
-    caddy.virtualHosts."http://taskchampion.worldline.local".extraConfig =
+    caddy.virtualHosts."taskchampion.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:${toString taskchampion-sync-server.port}";
   };
 }

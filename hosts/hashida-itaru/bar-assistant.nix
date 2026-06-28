@@ -1,7 +1,8 @@
 { config, ... }:
 
 let
-  meilisearchUrl = "http://meilisearch.worldline.local";
+  meilisearchDomain = "meilisearch.home.nickthegroot.com";
+  meilisearchUrl = "https://${meilisearchDomain}";
 in
 {
   services = {
@@ -13,7 +14,7 @@ in
     bar-assistant = rec {
       enable = true;
       appKeyFile = "/var/lib/secrets/bar-assistant-key";
-      hostName = "http://bar-api.worldline.local";
+      hostName = "https://bar-api.home.nickthegroot.com";
       appURL = hostName;
 
       redis.enable = true;
@@ -25,14 +26,14 @@ in
 
     salt-rim = {
       enable = true;
-      hostName = "http://bar.worldline.local";
+      hostName = "https://bar.home.nickthegroot.com";
       settings = {
-        API_URL = "http://bar-api.worldline.local";
+        API_URL = "https://bar-api.home.nickthegroot.com";
         MEILISEARCH_URL = meilisearchUrl;
       };
     };
 
-    caddy.virtualHosts."${meilisearchUrl}".extraConfig =
+    caddy.virtualHosts."${meilisearchDomain}".extraConfig =
       "reverse_proxy localhost:${toString config.services.meilisearch.listenPort}";
   };
 }

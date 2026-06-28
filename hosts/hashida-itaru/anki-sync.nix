@@ -16,7 +16,7 @@
       ];
     };
 
-    caddy.virtualHosts."http://anki-sync.worldline.local".extraConfig =
+    caddy.virtualHosts."anki-sync.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:${toString anki-sync-user.port}";
   };
 

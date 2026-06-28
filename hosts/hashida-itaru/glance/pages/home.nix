@@ -41,11 +41,17 @@
               links = lib.mapAttrsToList (
                 url: v:
                 let
-                  # Extract the service name from the URL, e.g., "http://my-service.worldline.local"
-                  service = builtins.match "http://([a-zA-Z0-9-]+)\\.worldline\\.local" url;
+                  # Caddy virtualHost keys may be bare hostnames
+                  # ("my-svc.home.nickthegroot.com") or full URLs with a scheme
+                  # ("https://my-svc.home.nickthegroot.com"). Normalize both.
+                  m = builtins.match "(https?://)?([a-zA-Z0-9-]+)\\.home\\.nickthegroot\\.com.*" url;
+                  scheme = if m == null then null else builtins.elemAt m 0;
+                  name = if m == null then null else builtins.elemAt m 1;
+                  # Guarantee a usable https:// URL in the resulting bookmark.
+                  href = if scheme == null then "https://${url}" else url;
                   # Convert kebab-case to Title Case
                   title =
-                    if service == null then
+                    if name == null then
                       "Unknown"
                     else
                       builtins.concatStringsSep " " (
@@ -53,11 +59,12 @@
                           word:
                           lib.strings.toUpper (builtins.substring 0 1 word)
                           + lib.strings.toLower (builtins.substring 1 (builtins.stringLength word) word)
-                        ) (lib.strings.splitString "-" (builtins.elemAt service 0))
+                        ) (lib.strings.splitString "-" name)
                       );
                 in
                 {
-                  inherit title url;
+                  inherit title;
+                  url = href;
                 }
               ) config.services.caddy.virtualHosts;
             }
@@ -91,7 +98,7 @@
           style = "detailed-list";
           feeds = [
             {
-              url = "http://rss.worldline.local/api/query.php?user=admin&t=7hp4NHm5HNAmQjGPgq3m07&f=rss";
+              url = "https://rss.home.nickthegroot.com/api/query.php?user=admin&t=7hp4NHm5HNAmQjGPgq3m07&f=rss";
               title = "Favorites";
             }
           ];

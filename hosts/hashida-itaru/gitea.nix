@@ -1,6 +1,6 @@
 let
   port = 8152;
-  domain = "git.worldline.local";
+  domain = "git.home.nickthegroot.com";
 in
 {
   services = {
@@ -8,11 +8,11 @@ in
       enable = true;
       settings.server = {
         DOMAIN = domain;
-        ROOT_URL = "http://${domain}";
+        ROOT_URL = "https://${domain}";
         HTTP_PORT = port;
       };
     };
 
-    caddy.virtualHosts."http://${domain}".extraConfig = "reverse_proxy localhost:${toString port}";
+    caddy.virtualHosts."${domain}".extraConfig = "reverse_proxy localhost:${toString port}";
   };
 }

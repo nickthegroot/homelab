@@ -31,7 +31,7 @@ No `shell.nix` / `devShells`.
 - **Package derivations** must be at `packages/<name>/package.nix`. Discovered by `scanPaths` + `callPackage`.
 - **Service modules** follow: `with lib;` -> `options` -> `config` -> `mkIf cfg.enable`, create dedicated `user` + `group`, use `systemd.tmpfiles.rules` for dirs.
 - **State version** `25.11`. Unfree enabled globally. `programs.nh` for Nix helper.
-- **Domain**: `*.worldline.local` (mDNS). NAS at `192.168.1.10` via NFS.
+- **Domain**: `*.home.nickthegroot.com` (mDNS). NAS at `192.168.1.10` via NFS.
 - **Secrets**: **Two separate systems** -- (1) agenix: `.age` files decrypted at build via host SSH keys to `/run/secrets/`, only used by anki-sync. `nas-account.age` is defined but unused/dangling. (2) `/var/lib/secrets/`: plain files expected on-disk, used by bar-assistant, glance, home-assistant, freshrss -- NOT agenix-managed.
 - **Reverse proxy**: Caddy (nginx disabled). Bootloader: systemd-boot.
 - **Theme**: catppuccin mocha.
