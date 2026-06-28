@@ -20,5 +20,7 @@
       "reverse_proxy localhost:${toString anki-sync-user.port}";
   };
 
+  systemd.services.anki-sync-user.requires = [ "mnt-hosting.mount" ];
+
   users.users.anki-sync.extraGroups = [ "nas-users" ];
 }
