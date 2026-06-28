@@ -23,6 +23,7 @@ in
         "mqtt"
         "nest"
         "tesla_wall_connector"
+        "roborock"
       ];
 
       config = {
