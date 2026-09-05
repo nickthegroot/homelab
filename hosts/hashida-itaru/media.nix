@@ -8,6 +8,15 @@
     };
     caddy.virtualHosts."jellyfin.home.nickthegroot.com".extraConfig = "reverse_proxy localhost:8096";
 
+    calibre-server = {
+      enable = true;
+      port = 8081;
+      libraries = [ "/mnt/media/books" ];
+      group = "media";
+    };
+    caddy.virtualHosts."calibre.home.nickthegroot.com".extraConfig =
+      "reverse_proxy localhost:${toString calibre-server.port}";
+
     komga = {
       enable = true;
       settings.server.port = 8097;
