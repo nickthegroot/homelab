@@ -1,7 +1,9 @@
+{ pkgs-unstable, ... }:
 {
   services = rec {
     jellyfin = {
       enable = true;
+      package = pkgs-unstable.jellyfin;
       openFirewall = true;
       group = "media";
       # port = 8096 is the default, and can't be easily set in nix
