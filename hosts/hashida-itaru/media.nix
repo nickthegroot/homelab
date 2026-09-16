@@ -24,6 +24,7 @@
       port = 2283;
       mediaLocation = "/mnt/media-sensitive/photos";
       group = "media";
+      package = pkgs-unstable.immich;
     };
     caddy.virtualHosts."photos.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:${toString immich.port}";
