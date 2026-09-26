@@ -8,20 +8,20 @@
 
 buildNpmPackage (finalAttrs: rec {
   pname = "mokuro-reader";
-  version = "1.5.0";
+  version = "1.9.1";
 
   src = fetchFromGitHub {
     owner = "Gnathonic";
     repo = "mokuro-reader";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-roVteKQwrlLj7Lgtq3H/HL9NrOZ8hUUjju8Cejs8How=";
+    hash = "sha256-EYZaGcvcC95yMIl9B76RX1G0Lx97GjLpazYOQs0xkXU=";
   };
 
   patches = [
     ./adapter-node.patch
   ];
 
-  npmDepsHash = "sha256-+t9FJb41xr70lrw9qOCk3UP0CNq9dc+n+DZ8JQ0Lgvw=";
+  npmDepsHash = "sha256-MD/4h7A/FeeTSISKcB5CvGYL9ODB1D/PB4y+cj+mmPY=";
 
   nativeBuildInputs = [
     makeWrapper
