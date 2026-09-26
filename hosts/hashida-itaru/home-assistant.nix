@@ -20,6 +20,7 @@ in
         "shopping_list"
         "nws"
 
+        "caldav"
         "mqtt"
         "nest"
         "tesla_wall_connector"
