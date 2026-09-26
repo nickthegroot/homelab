@@ -15,6 +15,9 @@ in
     # https://wiki.nixos.org/wiki/Home_Assistant
     home-assistant = {
       enable = true;
+      customComponents = [
+        pkgs.hass-neakasa
+      ];
       extraComponents = [
         "radio_browser"
         "shopping_list"
