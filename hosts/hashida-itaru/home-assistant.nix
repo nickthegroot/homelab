@@ -17,6 +17,7 @@ in
       enable = true;
       customComponents = [
         pkgs.hass-neakasa
+        pkgs.hass-petlibro
       ];
       extraComponents = [
         "radio_browser"
