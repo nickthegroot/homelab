@@ -2,14 +2,12 @@
   pkgs,
   lib,
   mylib,
-  mokuro-bunko,
   agenix,
   ...
 }:
 {
   imports = [
     agenix.nixosModules.default
-    mokuro-bunko.nixosModules.default
     ../services/default.nix
   ];
 

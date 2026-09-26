@@ -6,29 +6,5 @@
       group = "media";
     };
     caddy.virtualHosts."mokuro.home.nickthegroot.com".extraConfig = "reverse_proxy localhost:4821";
-
-    mokuro-bunko = rec {
-      enable = true;
-      group = "media";
-      data_path = "/mnt/media/books/manga";
-
-      settings = {
-        server.port = 4822;
-        catalog = {
-          enabled = true;
-          reader_url = "https://mokuro.home.nickthegroot.com";
-        };
-
-        ocr.backend = "skip";
-
-        cors.allowed_origins = [
-          settings.catalog.reader_url
-          "https://reader.mokuro.app"
-          "http://localhost:*"
-        ];
-      };
-    };
-    caddy.virtualHosts."mokuro-bunko.home.nickthegroot.com".extraConfig =
-      "reverse_proxy localhost:4822";
   };
 }
