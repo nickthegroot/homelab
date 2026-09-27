@@ -51,9 +51,8 @@ in
 
         # https://nixos.wiki/wiki/Home_Assistant#Combine_declarative_and_UI_defined_automations
         automation = "!include automations.yaml";
-
-        # https://nixos.wiki/wiki/Home_Assistant#Combine_declarative_and_UI_defined_scenes
         scenes = "!include scenes.yaml";
+        script = "!include scripts.yaml";
       };
     };
 
@@ -81,5 +80,6 @@ in
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
     "f ${config.services.home-assistant.configDir}/scenes.yaml 0755 hass hass"
+    "f ${config.services.home-assistant.configDir}/scripts.yaml 0755 hass hass"
   ];
 }
