@@ -35,7 +35,6 @@ in
         default_config = { };
         homeassistant = {
           name = "DeGroot Home";
-          unit_system = "metric";
         };
 
         http = {
