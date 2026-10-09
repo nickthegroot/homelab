@@ -20,15 +20,15 @@ in
         pkgs.hass-petlibro
       ];
       extraComponents = [
-        "radio_browser"
-        "shopping_list"
-        "nws"
-
         "caldav"
         "mqtt"
         "nest"
-        "tesla_wall_connector"
+        "nws"
+        "open_router"
+        "radio_browser"
         "roborock"
+        "shopping_list"
+        "tesla_wall_connector"
       ];
 
       config = {
