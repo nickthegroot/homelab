@@ -1,4 +1,10 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  nixpkgs-unstable,
+  pkgs-unstable,
+  ...
+}:
 let
   catppuccinTheme = pkgs.fetchurl {
     url = "https://github.com/catppuccin/home-assistant/releases/download/v2.1.2/catppuccin.yaml";
@@ -11,6 +17,11 @@ let
   '';
 in
 {
+  imports = [
+    # matterjs-server is only in nixpkgs-unstable until nixos-26.11 ships it; then use pkgs.matterjs-server and drop this import
+    "${nixpkgs-unstable}/nixos/modules/services/home-automation/matterjs-server.nix"
+  ];
+
   services = {
     # https://wiki.nixos.org/wiki/Home_Assistant
     home-assistant = {
@@ -21,6 +32,7 @@ in
       ];
       extraComponents = [
         "caldav"
+        "matter"
         "mqtt"
         "nest"
         "nws"
@@ -60,6 +72,12 @@ in
       environmentFile = "/var/lib/secrets/govee2mqtt";
     };
 
+    matterjs-server = {
+      enable = true;
+      package = pkgs-unstable.matterjs-server;
+      openFirewall = true;
+    };
+
     mosquitto = {
       enable = true;
       listeners = [
@@ -75,6 +93,11 @@ in
     caddy.virtualHosts."home.home.nickthegroot.com".extraConfig =
       "reverse_proxy localhost:${toString config.services.home-assistant.config.http.server_port}";
   };
+
+  # mDNS, so matterjs-server can discover commissionable Matter devices on the LAN
+  networking.firewall.allowedUDPPorts = [
+    5353
+  ];
 
   systemd.tmpfiles.rules = [
     "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
