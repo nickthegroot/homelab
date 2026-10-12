@@ -47,6 +47,8 @@ in
         default_config = { };
         homeassistant = {
           name = "DeGroot Home";
+          media_dirs.nas = "/mnt/media-sensitive/home";
+          allowlist_external_dirs = [ "/mnt/media-sensitive/home" ];
         };
 
         http = {
@@ -104,4 +106,6 @@ in
     "f ${config.services.home-assistant.configDir}/scenes.yaml 0755 hass hass"
     "f ${config.services.home-assistant.configDir}/scripts.yaml 0755 hass hass"
   ];
+
+  systemd.services.home-assistant.serviceConfig.SupplementaryGroups = [ "media" ];
 }
