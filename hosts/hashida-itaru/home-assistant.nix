@@ -107,5 +107,11 @@ in
     "f ${config.services.home-assistant.configDir}/scripts.yaml 0755 hass hass"
   ];
 
-  systemd.services.home-assistant.serviceConfig.SupplementaryGroups = [ "media" ];
+  systemd.services.home-assistant = {
+    unitConfig.StartLimitIntervalSec = 0;
+    serviceConfig = {
+      RestartSec = "20s";
+      SupplementaryGroups = [ "media" ];
+    };
+  };
 }
