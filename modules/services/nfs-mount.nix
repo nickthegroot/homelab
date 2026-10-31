@@ -42,6 +42,12 @@ in
     fileSystems = mapAttrs (mountPoint: exportPath: {
       device = "${cfg.host}:${exportPath}";
       fsType = "nfs";
+      options = [
+        "_netdev"
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=600"
+      ];
     }) cfg.shares;
   };
 }
