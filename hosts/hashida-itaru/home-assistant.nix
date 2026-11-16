@@ -41,6 +41,7 @@ in
         "roborock"
         "shopping_list"
         "tesla_wall_connector"
+        "tplink"
       ];
 
       config = {
